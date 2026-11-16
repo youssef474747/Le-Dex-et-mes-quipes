@@ -9,6 +9,37 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.5",
+    "json-server": "^0.17.4",
     "tailwindcss": "^4.3.5"
-  }
+  },
+  "main": "data.js",
+  "dependencies": {
+    "detect-libc": "^2.1.2",
+    "enhanced-resolve": "^5.27.0",
+    "graceful-fs": "^4.2.12",
+    "is-extglob": "^2.1.1",
+    "is-glob": "^4.0.3",
+    "jiti": "^2.7.0",
+    "lightningcss": "^1.33.0",
+    "lightningcss-win32-x64-msvc": "^1.33.0",
+    "magic-string": "^1.4.5",
+    "mri": "^1.2.0",
+    "node-addon-api": "^7.1.1",
+    "picocolors": "^1.1.1",
+    "picomatch": "^4.0.7",
+    "source-map-js": "^1.2.2",
+    "tapable": "^2.3.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/youssef474747/Mon-Dex-connect-.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/youssef474747/Mon-Dex-connect-/issues"
+  },
+  "homepage": "https://github.com/youssef474747/Mon-Dex-connect-#readme"
 }
