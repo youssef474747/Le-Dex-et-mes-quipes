@@ -1,0 +1,173 @@
+
+{
+  "creatures": [
+    {
+      "id": 1,
+      "number": "#001",
+      "name": "Pikachu",
+      "type": "Électrik",
+      "level": "50",
+      "stats": {
+        "hp": 35,
+        "attack": 50,
+        "defense": 50
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/25.png",
+      "description": "An iconic electric mouse that stores energy in its red cheek pouches and releases powerful lightning attacks."
+    },
+    {
+      "id": 2,
+      "number": "#002",
+      "name": "Charizard",
+      "type": "Feu",
+      "level": "50",
+      "stats": {
+        "hp": 78,
+        "attack": 84,
+        "defense": 78
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/6.png",
+      "description": "A powerful fire Pokémon that can fly and breathe intense flames."
+    },
+    {
+      "id": 3,
+      "number": "#003",
+      "name": "Bulbasaur",
+      "type": "Plante",
+      "level": "45",
+      "stats": {
+        "hp": 45,
+        "attack": 49,
+        "defense": 49
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png",
+      "description": "A small Pokémon with a plant bulb on its back that grows as it develops."
+    },
+    {
+      "id": 4,
+      "number": "#004",
+      "name": "Squirtle",
+      "type": "Eau",
+      "level": "40",
+      "stats": {
+        "hp": 44,
+        "attack": 48,
+        "defense": 65
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/7.png",
+      "description": "A water Pokémon that protects itself with its shell and launches water attacks."
+    },
+    {
+      "id": 5,
+      "number": "#005",
+      "name": "Lucario",
+      "type": "Combat",
+      "level": "55",
+      "stats": {
+        "hp": 70,
+        "attack": 110,
+        "defense": 70
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/448.png",
+      "description": "A fighting Pokémon capable of sensing the aura of living creatures."
+    },
+    {
+      "id": 6,
+      "number": "#006",
+      "name": "Greninja",
+      "type": "Eau",
+      "level": "60",
+      "stats": {
+        "hp": 72,
+        "attack": 95,
+        "defense": 67
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/658.png",
+      "description": "A fast Pokémon that moves like a ninja and uses water-based attacks."
+    },
+    {
+      "id": 7,
+      "number": "#007",
+      "name": "Gengar",
+      "type": "Spectre",
+      "level": "50",
+      "stats": {
+        "hp": 60,
+        "attack": 65,
+        "defense": 60
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/94.png",
+      "description": "A ghost Pokémon that hides in shadows and enjoys surprising others."
+    },
+    {
+      "id": 8,
+      "number": "#008",
+      "name": "Garchomp",
+      "type": "Dragon",
+      "level": "65",
+      "stats": {
+        "hp": 108,
+        "attack": 130,
+        "defense": 95
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png",
+      "description": "A powerful dragon Pokémon known for its incredible speed."
+    },
+    {
+      "id": 9,
+      "number": "#009",
+      "name": "Gardevoir",
+      "type": "Psy",
+      "level": "55",
+      "stats": {
+        "hp": 68,
+        "attack": 65,
+        "defense": 65
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/282.png",
+      "description": "A psychic Pokémon that can sense emotions and protect its trainer."
+    },
+    {
+      "id": 10,
+      "number": "#010",
+      "name": "Eevee",
+      "type": "Normal",
+      "level": "35",
+      "stats": {
+        "hp": 55,
+        "attack": 55,
+        "defense": 50
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/133.png",
+      "description": "A unique Pokémon that can evolve into several different forms."
+    },
+    {
+      "id": 11,
+      "number": "#011",
+      "name": "Snorlax",
+      "type": "Normal",
+      "level": "60",
+      "stats": {
+        "hp": 160,
+        "attack": 110,
+        "defense": 65
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/143.png",
+      "description": "A large Pokémon that spends most of its time sleeping and eating."
+    },
+    {
+      "id": 12,
+      "number": "#012",
+      "name": "Arcanine",
+      "type": "Feu",
+      "level": "55",
+      "stats": {
+        "hp": 90,
+        "attack": 110,
+        "defense": 80
+      },
+      "image": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/59.png",
+      "description": "A fast and powerful fire Pokémon known for its loyalty and strength."
+    }
+  ]
+}
