@@ -1,6 +1,6 @@
 import { getCreatures, getCreature } from "./api.js";
 import { createCards, showLoading, showError, showDetails } from "./ui.js";
-import { saveLastSearch, getLastSearch, toggleFavorite } from "./storage.js";
+import {  saveLastSearch,getLastSearch, toggleFavorite,  saveLastType, getLastType} from "./storage.js";
 
 let offset = 0;
 let loadedPokemons = [];
@@ -43,17 +43,13 @@ async function init() {
         loadedPokemons = pokemons;
         allPokemons = [...pokemons];
 
+selectedType = getLastType();
+
 const lastSearch = getLastSearch();
 
 searchInput.value = lastSearch;
 
-if(lastSearch){
-    const results = await getCreatures(lastSearch);
-    createCards(results);
-}else {
-    createCards(pokemons) ;
-}
-
+await filterPokemons();
     } catch (error) {
         showError("Erreur lors du chargement");
     }
@@ -95,6 +91,7 @@ filters.addEventListener("click", function(event) {
     if (!button) return;
 
     selectedType = button.dataset.type;
+    saveLastType(selectedType);
 
     filterPokemons();
 });

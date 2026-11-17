@@ -1,5 +1,7 @@
 const STORAGE_KEY ="mon-dex-favorites" ;
 const SEARCH_KEY = "mon-dex-last-search";
+const TYPE_KEY = "mon-dex-last-type";
+
 function getFavorites(){
     try{
         const favorites = localStorage.getItem(STORAGE_KEY);
@@ -46,11 +48,21 @@ function saveLastSearch(search) {
     return sessionStorage.getItem(SEARCH_KEY) || "" ;
  }
 
+ function saveLastType(type) {
+    localStorage.setItem(TYPE_KEY ,type);
+ }
+
+ function getLastType(){
+    return localStorage.getItem(TYPE_KEY) || "all" ;
+ }
+
 
 export {
     getFavorites,
     toggleFavorite,
     isFavorite,
     saveLastSearch,
-    getLastSearch
+    getLastSearch,
+    saveLastType,
+    getLastType
 };
