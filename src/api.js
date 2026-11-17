@@ -8,6 +8,9 @@ async function request(method , route ,body){
         "Content-Type": "application/json"
     }
 };
+if (body) {
+    options.body = JSON.stringify(body);
+}
 
     const response = await fetch(url,options);
 if (!response.ok) {
@@ -18,9 +21,24 @@ return data ;
 
 }
 
+
 // GET ALL CREATURE
-async function getCreatures(){
-    const creatures = await request("GET" , "/creatures"); 
+async function getCreatures(search , type){
+    let route = "/creatures"
+
+    if(search){
+        route = "/creatures?q=" + search;
+    }
+   if(type){
+    if(search){
+        route = route + "&type=" + type;
+    }else{
+        route = route + "?type=" + type;
+    }
+}
+
+
+    const creatures = await request("GET" , route); 
     return creatures ;
 }
 
@@ -41,24 +59,22 @@ async function createCreature(creature){
 // PUT
 
 async function updateCreature(id , creature){
-    const updatedCreature = await request("PUT" , "/creatures" + id ,creature);
+    const updatedCreature = await request("PUT" , "/creatures/" + id ,creature);
     return updatedCreature ;
 }
 
 // DELETE
 async function deleteCreature(id){
-    const deletedCreature = await request("DELETE" , "/creatures" + id);
+    const deletedCreature = await request("DELETE" , "/creatures/" + id);
     return deletedCreature;
 
 }
 
 export{
     request,
-    getCreature,
     getCreatures,
-    updateCreature,
-    deleteCreature,
     getCreature,
     createCreature,
-
+    updateCreature,
+    deleteCreature,
 };

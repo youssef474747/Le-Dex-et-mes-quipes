@@ -1,4 +1,4 @@
-import { getPokemons, getPokemon } from "./api.js";
+import { getCreatures, getCreature } from "./api.js";
 import { createCards, showLoading, showError, showDetails } from "./ui.js";
 import { saveLastSearch, getLastSearch, toggleFavorite } from "./storage.js";
 
@@ -14,12 +14,23 @@ const searchInput = document.getElementById("search");
 const clearSearchBtn = document.getElementById("clear-search");
 
 // Afficher les Pokémon selon le filtre
-function filterPokemons() {
-    const filteredPokemons = loadedPokemons.filter(function(pokemon) {
-        return selectedType === "all" || pokemon.type === selectedType;
-    });
 
-    createCards(filteredPokemons);
+async function filterPokemons() {
+    try {
+        let type = "";
+
+        if (selectedType !== "all") {
+            type = selectedType;
+        }
+
+        const name = searchInput.value.toLowerCase().trim();
+
+        const creatures = await getCreatures(name, type);
+        createCards(creatures);
+
+    } catch (error) {
+        showError("Erreur lors du filtrage");
+    }
 }
 
 // Charger les premiers Pokémon
@@ -27,7 +38,7 @@ async function init() {
     try {
         showLoading();
 
-        const pokemons = await getPokemons(offset);
+         const pokemons = await getCreatures();
 
         loadedPokemons = pokemons;
         allPokemons = [...pokemons];
@@ -36,46 +47,48 @@ const lastSearch = getLastSearch();
 
 searchInput.value = lastSearch;
 
-if (lastSearch) {
-    const results = loadedPokemons.filter(function(pokemon) {
-        return pokemon.name.includes(lastSearch);
-    });
-
+if(lastSearch){
+    const results = await getCreatures(lastSearch);
     createCards(results);
-} else {
-    createCards(pokemons);
+}else {
+    createCards(pokemons) ;
 }
 
     } catch (error) {
         showError("Erreur lors du chargement");
     }
 }
+
 
 // Charger 20 Pokémon supplémentaires
-loadMoreBtn.addEventListener("click", async function() {
-    try {
-        if (isSearching) {
-            isSearching = false;
-            loadedPokemons = [...allPokemons];
-        }
+// loadMoreBtn.addEventListener("click", async function() {
+//     try {
+//         if (isSearching) {
+//             isSearching = false;
+//             loadedPokemons = [...allPokemons];
+//         }
 
-        const nextOffset = offset + 20;
+//         const nextOffset = offset + 20;
 
-        const pokemons = await getPokemons(nextOffset);
+//         const pokemons = await getPokemons(nextOffset);
 
-        loadedPokemons.push(...pokemons);
-        allPokemons.push(...pokemons);
+//         loadedPokemons.push(...pokemons);
+//         allPokemons.push(...pokemons);
 
-        offset = nextOffset;
+//         offset = nextOffset;
 
-        filterPokemons();
+//         filterPokemons();
 
-    } catch (error) {
-        showError("Erreur lors du chargement");
-    }
-});
+//     } catch (error) {
+//         showError("Erreur lors du chargement");
+//     }
+    
+// });  
+
+loadMoreBtn.style.display = "none";
 
 // Filtrer par type
+
 filters.addEventListener("click", function(event) {
     const button = event.target.closest("button");
 
@@ -86,22 +99,20 @@ filters.addEventListener("click", function(event) {
     filterPokemons();
 });
 
+
 // Lancer l'application
 init();
 
 // RECHERCH
-searchInput.addEventListener("input", function() {
-    const name = searchInput.value.toLowerCase().trim();
 
-    // Sauvegarder la recherche
+searchInput.addEventListener("input", function () {
+    const name = searchInput.value.toLowerCase().trim();
     saveLastSearch(name);
 
-    const results = loadedPokemons.filter(function(pokemon) {
-        return pokemon.name.includes(name);
-    });
-
-    createCards(results);
+    filterPokemons();
 });
+ 
+
 // afficher les details
 
 const grid =document.getElementById("grid");
@@ -125,7 +136,7 @@ grid.addEventListener("click" , async function(event){
     if(!card) return ;
 
     try{
-        const pokemon = await getPokemon(card.dataset.id);
+        const pokemon = await getCreature(card.dataset.id);
         showDetails(pokemon);
     }catch(error){
         alert("Erreur lors du chargement des details ");
@@ -134,8 +145,9 @@ grid.addEventListener("click" , async function(event){
 
 
 // Effacer la recherche
-clearSearchBtn.addEventListener("click", function() {
+clearSearchBtn.addEventListener("click",async function() {
     searchInput.value = "";
     saveLastSearch("");
-    filterPokemons();
+       filterPokemons();
+
 });
