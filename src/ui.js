@@ -85,44 +85,81 @@ function showError(message){
 }
 
 
+
+
 function showDetails(pokemon) {
-    detail.innerHTML = `
-        <div class="flex items-center justify-between">
-            <span class="font-mono text-sm">Détail</span>
+    detail.replaceChildren();
 
-            <button id="close-details" type="button"
-                class="btn-outline w-11 px-0 bg-red-500">
-                X
-            </button>
-        </div>
+    const image = document.createElement("img") ;
+    image.src = pokemon.image ;
+    image.alt = pokemon.name ;
+    image.className = "w-full h-48 object-contain";
+    detail.append(image);
 
-        <img src="${pokemon.image}" alt="${pokemon.name}"
-            class="w-full h-48 object-contain">
+    const name = document.createElement("h2"); 
+    name.className = "font-display text-3xl font-extrabold capitalize";
+    name.textContent = pokemon.name
+    detail.append(name) ;
 
-        <h2 class="font-display text-3xl font-extrabold capitalize">
-            ${pokemon.name}
-        </h2>
+    const type = document.createElement("p");
+    type.textContent = "Type : " + pokemon.type ; 
+    detail.append(type);
 
-        <p>Type : ${pokemon.type}</p>
-<div class="flex flex-col gap-4">
-    ${createStatBar("HP", pokemon.stats.hp, "bg-red-500")}
+    const statsContainer = document.createElement("div");
+    statsContainer.className = "flex flex-col gap-4";
+    detail.append(statsContainer);
 
-    ${createStatBar("Attack", pokemon.stats.attack, "bg-green-800")}
+    const hp = document.createElement("p") ;
+    hp.textContent ="Hp : " + pokemon.stats.hp
+    statsContainer.append(hp);
 
-    ${createStatBar("Defense", pokemon.stats.defense, "bg-blue-500")}
-</div>
-    `;
+    const attack = document.createElement("p");
+    attack.textContent ="Attack : " + pokemon.stats.attack ;
+    statsContainer.append(attack);
 
-    document.getElementById("close-details").addEventListener("click", function() {
-        detail.innerHTML = `
-            <h2 class="font-display text-3xl font-extrabold">
-                Sélectionnez un Pokémon
-            </h2>
-            <p>Cliquez sur une carte pour afficher les détails</p>
-        `;
-    });
+    const defense = document.createElement("p");
+    defense.textContent = "Defense : " + pokemon.stats.defense ; 
+    statsContainer.append(defense) ;
 
-}
+    const percentage = Math.min((value / 255) * 100, 100);
+    
+//     detail.innerHTML = `
+//         <div class="flex items-center justify-between">
+//             <span class="font-mono text-sm">Détail</span>
+
+//             <button id="close-details" type="button"
+//                 class="btn-outline w-11 px-0 bg-red-500">
+//                 X
+//             </button>
+//         </div>
+
+//         <img src="${pokemon.image}" alt="${pokemon.name}"
+//             class="w-full h-48 object-contain">
+
+//         <h2 class="font-display text-3xl font-extrabold capitalize">
+//             ${pokemon.name}
+//         </h2>
+
+//         <p>Type : ${pokemon.type}</p>
+// <div class="flex flex-col gap-4">
+//     ${createStatBar("HP", pokemon.stats.hp, "bg-red-500")}
+
+//     ${createStatBar("Attack", pokemon.stats.attack, "bg-green-800")}
+
+//     ${createStatBar("Defense", pokemon.stats.defense, "bg-blue-500")}
+// </div>
+//     `;
+
+//     document.getElementById("close-details").addEventListener("click", function() {
+//         detail.innerHTML = `
+//             <h2 class="font-display text-3xl font-extrabold">
+//                 Sélectionnez un Pokémon
+//             </h2>
+//             <p>Cliquez sur une carte pour afficher les détails</p>
+//         `;
+//     });
+
+// }
 
    function createStatBar(label, value, color) {
     const percentage = Math.min((value / 255) * 100, 100);
