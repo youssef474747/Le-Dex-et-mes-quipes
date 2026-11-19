@@ -109,19 +109,13 @@ function showDetails(pokemon) {
     statsContainer.className = "flex flex-col gap-4";
     detail.append(statsContainer);
 
-    const hp = document.createElement("p") ;
-    hp.textContent ="Hp : " + pokemon.stats.hp
-    statsContainer.append(hp);
+    statsContainer.append(
+    createStatBar("HP", pokemon.stats.hp, "bg-red-500"),
+    createStatBar("Attack", pokemon.stats.attack, "bg-green-800"),
+    createStatBar("Defense", pokemon.stats.defense, "bg-blue-500")
+);
+}
 
-    const attack = document.createElement("p");
-    attack.textContent ="Attack : " + pokemon.stats.attack ;
-    statsContainer.append(attack);
-
-    const defense = document.createElement("p");
-    defense.textContent = "Defense : " + pokemon.stats.defense ; 
-    statsContainer.append(defense) ;
-
-    const percentage = Math.min((value / 255) * 100, 100);
     
 //     detail.innerHTML = `
 //         <div class="flex items-center justify-between">
@@ -162,23 +156,34 @@ function showDetails(pokemon) {
 // }
 
    function createStatBar(label, value, color) {
-    const percentage = Math.min((value / 255) * 100, 100);
 
-    return `
-        <div class="flex flex-col gap-1">
-            <div class="flex justify-between text-sm font-bold">
-                <span>${label}</span>
-                <span>${value}</span>
-            </div>
+const percentage = Math.min((value / 255) * 100, 100);
+    const container = document.createElement("div")
+container.className = "flex flex-col gap-1";
 
-            <div class="h-3 w-full rounded-full bg-gray-200 overflow-hidden">
-                <div
-                    class="h-full rounded-full ${color}"
-                    style="width: ${percentage}%">
-                </div>
-            </div>
-        </div>
-    `;
+const info = document.createElement("div") ;
+info.className = "flex justify-between text-sm font-bold";
+const statName =document.createElement("span");
+statName.textContent =label ;
+const statValue =document.createElement("span");
+statValue.textContent = value ;
+
+info.append(statName, statValue);
+container.append(info);
+
+const barBackground =document.createElement("div");
+barBackground.className ="h-3 w-full rounded-full overflow-hidden ";
+
+container.append(barBackground)
+
+const barFill = document.createElement("div");
+barFill.className = `h-full rounded-full ${color}`;
+barFill.style.width = percentage + "%";
+
+barBackground.append(barFill);
+container.append(barBackground);
+
+return container;
 }
 
 export { createCards, showLoading, showError, showDetails } 
