@@ -7,46 +7,81 @@ let detail = document.getElementById("detail");
 
 function createCards(pokemons , append = false){
     if(!append){
-       grid.innerHTML ="";
+       grid.replaceChildren();    }
+    if(pokemons.length === 0){
+        const message =document.createElement("p");
+        message.className ="col-span-full text-center";
+        message.textContent = "Aucune créature trouvée";
+        grid.appendChild(message);
+        creatureCount.textContent = 0;
+        return ;
     }
+
+
+
+
+
+
+
     pokemons.forEach(function(pokemon){
         let card = document.createElement("div");
         card.className = "creature-card relative bg-white rounded-xl p-4 shadow-sm border cursor-pointer";
         card.dataset.id = pokemon.id ;
-         card.innerHTML = `
-         <button
-    type="button"
-    class="favorite-btn absolute top-2 right-2 z-10 text-2xl"
-    data-id="${pokemon.id}">
-    ${isFavorite(pokemon.id) ? "❤️" : "♡"}
-</button>
-            <img src="${pokemon.image}" alt="${pokemon.name}" class="w-full h-40 object-contain">
-            <h3 class="font-bold text-lg mt-2 capitalize">${pokemon.name}</h3>
-            <p>Type: ${pokemon.type}</p>
-            <p>HP: ${pokemon.stats.hp}</p>
-            <p>Attack: ${pokemon.stats.attack}</p>
-            <p>Defense: ${pokemon.stats.defense}</p>
-        `;
-        grid.appendChild(card);
-    });
+         const favoriteButton = document.createElement("button");
+         favoriteButton.type = "button";
+         favoriteButton.className = "favorite-btn absolute top-2 right-2 z-10 text-2xl";     
+         favoriteButton.dataset.id = pokemon.id;
+         card.dataset.id = pokemon.id ;
+         favoriteButton.textContent =isFavorite(pokemon.id) ? "❤️" : "♡";
+         card.appendChild(favoriteButton) ;
 
-    creatureCount.textContent = grid.children.length ;
+         const image = document.createElement("img");
+         image.src = pokemon.image ;
+         image.alt = pokemon.name ;
+         image.className = "w-full h-40 object-contain";
+         card.appendChild(image);
+
+         const name = document.createElement("h3");
+         name.className ="font-bold text-lg mt-2 capitalize" ;
+         name.textContent = pokemon.name ;
+         card.appendChild(name) ;
+
+         const type = document.createElement("p");
+         type.textContent = "type : " + pokemon.type ;
+         card.appendChild(type) ;
+
+         const hp = document.createElement("p");
+         hp.textContent = "Hp : " + pokemon.stats.hp ;
+         card.appendChild(hp) ;
+
+         const attack = document.createElement("p");
+         attack.textContent = "Attack : " + pokemon.stats.attack ;
+         card.appendChild(attack);
+
+         const defense = document.createElement("p");
+         defense.textContent = "Defense : " + pokemon.stats.defense ;
+         card.appendChild(defense) ;
+         
+         grid.appendChild(card) ;
+         });
+
+    creatureCount.textContent = grid.children.length;
 }
 
-function showLoading(){
-    grid.innerHTML = `
-    <p class = "class-span-full text-center">
-    chargement des Pokémons... </p>
 
-    `;
+function showLoading(){
+    const message = document.createElement("p") ;
+    message.className ="col-span-full text-center"
+    message.textContent = "Chargements des pokémons ..."; 
+    grid.replaceChildren(message)
 }
 
 function showError(message){
-    grid.innerHTML =`
-    <p class ="class-span-full text-center text-red-500 ">
-    ${message}
-</p>
-    `;
+   const erreurMessage = document.createElement("p")
+
+   erreurMessage.className ="col-span-full text-center text-red-500" ;
+   erreurMessage.textContent =message ;
+   grid.replaceChildren(erreurMessage)
 }
 
 
@@ -109,4 +144,4 @@ function showDetails(pokemon) {
     `;
 }
 
-export { createCards, showLoading, showError, showDetails }
+export { createCards, showLoading, showError, showDetails } 
