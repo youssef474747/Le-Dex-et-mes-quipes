@@ -23,24 +23,38 @@ return data ;
 
 
 // GET ALL CREATURE
-async function getCreatures(search , type){
-    let route = "/creatures"
+async function getCreatures(search, type, sort, order) {
+    let route = "/creatures";
 
-    if(search){
-        route = "/creatures?q=" + search;
+    if (search) {
+        route = route + "?q=" + search;
     }
-   if(type){
-    if(search){
-        route = route + "&type=" + type;
-    }else{
-        route = route + "?type=" + type;
+
+    if (type) {
+        if (search) {
+            route = route + "&type=" + type;
+        } else {
+            route = route + "?type=" + type;
+        }
+    }
+
+   if (sort) {
+    if (search || type) {
+        route = route + "&_sort=" + sort;
+    } else {
+        route = route + "?_sort=" + sort;
     }
 }
 
-
-    const creatures = await request("GET" , route); 
-    return creatures ;
+if (order) {
+    route = route + "&_order=" + order;
 }
+
+    const creatures = await request("GET", route);
+    return creatures;
+}
+
+
 
 // GET ONE CREATURE
 

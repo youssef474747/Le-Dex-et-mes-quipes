@@ -7,11 +7,14 @@ let loadedPokemons = [];
 let selectedType = "all";
 let allPokemons = [];
 let isSearching = false;
+let selectedSort = "id";
+let sortOrder = "asc";
 
 const filters = document.getElementById("filters");
 const loadMoreBtn = document.getElementById("load-more");
 const searchInput = document.getElementById("search");
 const clearSearchBtn = document.getElementById("clear-search");
+const sortSelect = document.getElementById("sort");
 
 // Afficher les Pokémon selon le filtre
 
@@ -25,7 +28,7 @@ async function filterPokemons() {
 
         const name = searchInput.value.toLowerCase().trim();
 
-        const creatures = await getCreatures(name, type);
+        const creatures = await getCreatures(name, type, selectedSort, sortOrder);
         createCards(creatures);
 
     } catch (error) {
@@ -56,31 +59,6 @@ await filterPokemons();
 }
 
 
-// Charger 20 Pokémon supplémentaires
-// loadMoreBtn.addEventListener("click", async function() {
-//     try {
-//         if (isSearching) {
-//             isSearching = false;
-//             loadedPokemons = [...allPokemons];
-//         }
-
-//         const nextOffset = offset + 20;
-
-//         const pokemons = await getPokemons(nextOffset);
-
-//         loadedPokemons.push(...pokemons);
-//         allPokemons.push(...pokemons);
-
-//         offset = nextOffset;
-
-//         filterPokemons();
-
-//     } catch (error) {
-//         showError("Erreur lors du chargement");
-//     }
-    
-// });  
-
 loadMoreBtn.style.display = "none";
 
 // Filtrer par type
@@ -108,6 +86,20 @@ searchInput.addEventListener("input", function () {
 
     filterPokemons();
 });
+
+sortSelect.addEventListener("change" , function(){
+const value = sortSelect.value;    if(value === "name-asc"){
+        selectedSort ="name";
+        sortOrder ="asc";
+    }else if(value === "name-desc"){
+        selectedSort ="name";
+        sortOrder = "desc" ;
+    }else{
+        selectedSort ="id";
+        sortOrder ="asc" ;
+    }
+    filterPokemons() ;
+})
  
 
 // afficher les details
